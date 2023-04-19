@@ -21,7 +21,7 @@ parser.add_argument("--speaker", help="Helps in preprocessing", required=True)
 args = parser.parse_args()
 
 fa = [face_detection.FaceAlignment(face_detection.LandmarksType._2D, flip_input=False, 
-									device='cuda:{}'.format(id)) for id in range(args.ngpu)]
+									device='cuda:{}'.format(id)) for id in range(0)]
 # face_detection.LandmarksType._2D allows to detect points in a 2D space
 # 
 
@@ -41,7 +41,7 @@ def process_video_file(vfile):
 	
 	os.makedirs(fulldir, exist_ok=True)
 	
-	batches = [frames[i:i + args.batch_size] for i in range(0, len(frames), args.batch_size)]
+	batches = [frames[i:i + 12] for i in range(0, len(frames), 12)]
 
 	i = -1
 	for fb in batches:
