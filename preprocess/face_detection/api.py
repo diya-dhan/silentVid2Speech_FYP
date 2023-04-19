@@ -64,7 +64,6 @@ class FaceAlignment:
     def get_detections_for_batch(self, images):
         images = images[..., ::-1]
         detected_faces = self.face_detector.detect_from_batch(images.copy())
-        # return detected_faces
         results = []
 
         for i, d in enumerate(detected_faces):
@@ -75,12 +74,6 @@ class FaceAlignment:
             d = np.clip(d, 0, None)
             
             x1, y1, x2, y2 = map(int, d[:-1])
-
-            print("Coordinates : ")
-            print(x1)
-            print(x2)
-            print(y1)
-            print(y2)
 
             inp = images[i][y1 : y2, x1 : x2, ::-1]
             results.append((inp, x1, y1, x2, y2))
